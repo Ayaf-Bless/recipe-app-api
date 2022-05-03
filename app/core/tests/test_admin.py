@@ -21,3 +21,12 @@ class AdminSiteTest(TestCase):
 
         self.assertContains(res, self.user.name)
         self.assertContains(res, self.user.email)
+
+    def test_user_change_page(self):
+        """test user edit page works"""
+        # admin/core/user
+        url = reverse('admin:core_user_changelist')
+        res = self.client.get(url)
+
+        self.assertContains(res, self.user.name)
+        self.assertContains(res, self.user.email)
