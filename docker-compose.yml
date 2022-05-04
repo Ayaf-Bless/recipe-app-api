@@ -9,7 +9,7 @@ services:
     volumes:
       - ./app:/app
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py runserver db:5432"
     environment:
       - DB_HOST=db
       - DB_NAME=app
@@ -23,4 +23,4 @@ services:
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=suoersecretpassword
+      - POSTGRES_PASSWORD=supersecretpassword
