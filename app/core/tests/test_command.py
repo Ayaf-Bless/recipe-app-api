@@ -19,7 +19,7 @@ class CommandTest(TestCase):
     def test_wait_for_db(self, ts):
         """ Test wainting for DB """
         with patch("django.db.utils.ConnectionHandler.__getitem__") as gi:
-            gi.side_effect = [OperationalError] * 5 + [True]
+            gi.side_effect = [OperationalError] * 4 + [True]
             call_command("wait_for_db")
 
-            self.assertCountEqual(gi.call_count, 5)
+            self.assertEqual(gi.call_count, 5)
