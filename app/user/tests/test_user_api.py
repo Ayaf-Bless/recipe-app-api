@@ -7,11 +7,10 @@ from rest_framework import status
 
 
 CREATE_USER_URL = reverse("user:create")
-print(CREATE_USER_URL)
 
 
 def create_user(**params):
-    return get_user_model().objects().create_user(params)
+    return get_user_model().objects.create_user(**params)
 
 
 class PublicUserApiTest(TestCase):
@@ -23,8 +22,8 @@ class PublicUserApiTest(TestCase):
     def test_create_valid_user_success(self):
         """Test creating user with valid payload is successful"""
         payload = {
-            "email": "ayaf@dev.com",
-            "password": "1100",
+            "email": "ayaf@gmail.com",
+            "password": "11005",
             "name": "ayaf"
         }
         res = self.client.post(CREATE_USER_URL, payload)
@@ -37,8 +36,8 @@ class PublicUserApiTest(TestCase):
     def test_user_exist(self):
         """Test check if the user already exist and fails"""
         payload = {
-            "email": "ayaf@dev.com",
-            "password": "1100",
+            "email": "ayaf@gmail.com",
+            "password": "11040",
         }
         create_user(**payload)
 
@@ -48,7 +47,7 @@ class PublicUserApiTest(TestCase):
     def test_password_too_short(self):
         """Test that password is at least 5 character"""
         payload = {
-            "email": "ayaf@dev.com",
+            "email": "ayaf@gmail.com",
             "password": "ps",
         }
         res = self.client.post(CREATE_USER_URL, payload)
